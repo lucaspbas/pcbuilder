@@ -17,7 +17,6 @@ function getAmdGpu($amdGpu, $db) {
 //this is where we actually call the function and pass in both the value for $amd and the value for $db (this $db is actually coming from the connect.php file
 //the results are returned and in this case are set to the variable $resultsfromquery
 //you can then use these results in your page i.e. $resultsfromquery[ID], $resultsfromquery[name of your column]  $resultsfromquery[gpuName]
-
 function getAmdGpuID($amdGpu, $db) {
 	$stmt2 = $db->prepare("SELECT ID FROM gpuarray WHERE ID = :valueOfGPU");
 	if ($stmt2->execute(array(':valueOfGPU' => $amdGpu))) {
@@ -39,7 +38,6 @@ function cycleAmdID($db) {
 	$lastIDamdGpuID = array_pop($amdGpuIDArray);
 }
 cycleAmdID($db);
-
 function createArray($lastIDamdGpuID, $db) {
 	global $amdGpuArray;
 	$amdGpuArray = array();
@@ -51,7 +49,6 @@ function createArray($lastIDamdGpuID, $db) {
 
 createArray($lastIDamdGpuID, $db);
 $amdGpuArray_json = json_encode($amdGpuArray);
-//===============//
 
 function getNvidiaGpu($nvidiaGpu, $db) {
 	$stmt = $db->prepare("SELECT * FROM nvidiagpuarray WHERE ID = :valueOfNGPU");
@@ -81,7 +78,6 @@ function cycleNvidiaID($db) {
 	$lastIDNvidiaGpuID = array_pop($nvidiaGpuIDArray);
 }
 cycleNvidiaID($db);
-
 function createNvidiaArray($lastIDNvidiaGpuID, $db) {
 	global $nvidiaGpuArray;
 	$nvidiaGpuArray = array();
@@ -93,7 +89,6 @@ function createNvidiaArray($lastIDNvidiaGpuID, $db) {
 createNvidiaArray($lastIDNvidiaGpuID, $db);
 $nvidiaGpuArray_json = json_encode($nvidiaGpuArray);
 
-//===============//
 function getIntelCpu($intelCpu, $db) {
 	$stmt = $db->prepare("SELECT * FROM intelcpuarray WHERE ID = :valueOfICPU");
 	if ($stmt->execute(array(':valueOfICPU' => $intelCpu))) {
@@ -122,7 +117,6 @@ function cycleIntelID($db) {
 	$lastIDIntelCpuID = array_pop($intelCpuIDArray);
 }
 cycleIntelID($db);
-
 function createIntelArray($lastIDIntelCpuID, $db) {
 	global $intelCpuArray;
 	$intelCpuArray = array();
@@ -134,7 +128,6 @@ function createIntelArray($lastIDIntelCpuID, $db) {
 createIntelArray($lastIDIntelCpuID, $db);
 $intelCpuArray_json = json_encode($intelCpuArray);
 
-//===============//
 function getAmdCpu($amdCpu, $db) {
 	$stmt = $db->prepare("SELECT * FROM amdcpuarray WHERE ID = :valueOfACPU");
 	if ($stmt->execute(array(':valueOfACPU' => $amdCpu))) {
@@ -163,7 +156,6 @@ function cycleAmdCpuID($db) {
 	$lastIDAmdCpuID = array_pop($amdCpuIDArray);
 }
 cycleAmdCpuID($db);
-
 function createAmdArray($lastIDAmdCpuID, $db) {
 	global $amdCpuArray;
 	$amdCpuArray = array();
@@ -174,7 +166,6 @@ function createAmdArray($lastIDAmdCpuID, $db) {
 }
 createAmdArray($lastIDAmdCpuID, $db);
 $amdCpuArray_json = json_encode($amdCpuArray);
-
 /* LEGEND: 
 	$amdGpu/$nvidiaGpu = number matching ID in database (in our case, $i looping 0-15)
 	$stmt/$stmt2 = gets results into our general array
