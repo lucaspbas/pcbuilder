@@ -1,0 +1,23 @@
+	#nopadding {margin-bottom: 0px;}
+	.h2 {
+	margin-top: 20px;
+	margin-bottom: 5px;
+	}
+	#top {background-color: lightgrey;}
+	#header, #GPUAMD, #GPUNVIDIA, #CPUINTEL, #CPUAMD, #MOBOINTEL, #MOBOAMD, #RAM, #PSU, #STORAGE, #priceshow, h1, div {text-align: center;}
+	#pricediv, #alertdiv {display: none;}
+	ul { 
+    display: block;
+    list-style-type: disc;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+	}
+	.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	}
