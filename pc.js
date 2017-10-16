@@ -12,6 +12,8 @@ var CPURANGEMIN;
 var GPURANGEMAX;
 var GPURANGEMIN;
 var price;
+var i;
+var j;
 var AGPUPRICE;
 var NGPUPRICE;
 var ICPUPRICE;
@@ -100,13 +102,11 @@ function calculateCPURange(CPU) {
 	CPU = (Math.round(CPU));
 	CPURANGEMAX = (Math.round(CPU + (CPU*.14)));
 	CPURANGEMIN = (Math.round(CPU - (CPU*.14)));
-	CPURANGENUM = (Math.round(CPURANGEMAX - CPURANGEMIN));
 }
 function calculateGPURange(GPU) {
 	GPU = (Math.round(GPU));
 	GPURANGEMAX = (Math.round(GPU + (GPU*.14)));
 	GPURANGEMIN = (Math.round(GPU - (GPU*.14)));
-	GPURANGENUM = (Math.round(GPURANGEMAX - GPURANGEMIN));
 }
 function determineMOBO(MOBO) {
 	var intelCpuText;
