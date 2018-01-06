@@ -29,7 +29,6 @@ function cycleAmdID($db) {
 	$amdGpuIDArray = array();
 		for ($i = 1; $i < 20; $i++) {
 			$resultsfromqueryAmdID=getAmdGpuID($i, $db);
-
 			if ($resultsfromqueryAmdID) {
 			array_push($amdGpuIDArray, $resultsfromqueryAmdID[ID]);
 			}
@@ -46,10 +45,9 @@ function createArray($lastIDamdGpuID, $db) {
 		array_push($amdGpuArray, $resultsfromqueryAmd);
 	}
 }
-
 createArray($lastIDamdGpuID, $db);
 $amdGpuArray_json = json_encode($amdGpuArray);
-
+//===============//
 function getNvidiaGpu($nvidiaGpu, $db) {
 	$stmt = $db->prepare("SELECT * FROM nvidiagpuarray WHERE ID = :valueOfNGPU");
 	if ($stmt->execute(array(':valueOfNGPU' => $nvidiaGpu))) {
@@ -69,7 +67,6 @@ function cycleNvidiaID($db) {
 	$nvidiaGpuIDArray = array();
 		for ($i = 1; $i < 20; $i++) {
 			$resultsfromqueryID=getNvidiaGpuID($i, $db);
-
 			if ($resultsfromqueryID) {
 			array_push($nvidiaGpuIDArray, $resultsfromqueryID[ID]);
 			}
@@ -88,7 +85,7 @@ function createNvidiaArray($lastIDNvidiaGpuID, $db) {
 }
 createNvidiaArray($lastIDNvidiaGpuID, $db);
 $nvidiaGpuArray_json = json_encode($nvidiaGpuArray);
-
+//===============//
 function getIntelCpu($intelCpu, $db) {
 	$stmt = $db->prepare("SELECT * FROM intelcpuarray WHERE ID = :valueOfICPU");
 	if ($stmt->execute(array(':valueOfICPU' => $intelCpu))) {
@@ -108,7 +105,6 @@ function cycleIntelID($db) {
 	$intelCpuIDArray = array();
 		for ($i = 1; $i < 20; $i++) {
 			$resultsfromqueryIntelID=getIntelCpuID($i, $db);
-
 			if ($resultsfromqueryIntelID) {
 			array_push($intelCpuIDArray, $resultsfromqueryIntelID[ID]);
 			}
@@ -127,7 +123,7 @@ function createIntelArray($lastIDIntelCpuID, $db) {
 }
 createIntelArray($lastIDIntelCpuID, $db);
 $intelCpuArray_json = json_encode($intelCpuArray);
-
+//===============//
 function getAmdCpu($amdCpu, $db) {
 	$stmt = $db->prepare("SELECT * FROM amdcpuarray WHERE ID = :valueOfACPU");
 	if ($stmt->execute(array(':valueOfACPU' => $amdCpu))) {
@@ -147,7 +143,6 @@ function cycleAmdCpuID($db) {
 	$amdCpuIDArray = array();
 		for ($i = 1; $i < 20; $i++) {
 			$resultsfromqueryAmdCpuID=getAmdCpuID($i, $db);
-
 			if ($resultsfromqueryAmdCpuID) {
 			array_push($amdCpuIDArray, $resultsfromqueryAmdCpuID[ID]);
 			}
@@ -166,6 +161,120 @@ function createAmdArray($lastIDAmdCpuID, $db) {
 }
 createAmdArray($lastIDAmdCpuID, $db);
 $amdCpuArray_json = json_encode($amdCpuArray);
+//===============//
+function getPsu($psu, $db) {
+	$stmt = $db->prepare("SELECT * FROM psuarray WHERE ID = :valueOfPSU");
+	if ($stmt->execute(array(':valueOfPSU' => $psu))) {
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    return false;
+}
+function getPsuID($psu, $db) {
+	$stmt = $db->prepare("SELECT ID FROM psuarray WHERE ID = :valueOfPSU");
+	if ($stmt->execute(array(':valueOfPSU' => $psu))) {
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
+    }
+    return false;
+}
+function cyclePsuID($db) {
+	global $psuIDArray;
+	$psuIDArray = array();
+		for ($i = 1; $i < 20; $i++) {
+			$resultsfromqueryPsuID=getPsuID($i, $db);
+			if ($resultsfromqueryPsuID) {
+			array_push($psuIDArray, $resultsfromqueryPsuID[ID]);
+			}
+		}
+	global $lastIDPsuID;
+	$lastIDPsuID = array_pop($psuIDArray);
+}
+cyclePsuID($db);
+function createPsuArray($lastIDPsuID, $db) {
+	global $psuArray;
+	$psuArray = array();
+	for ($i = 1; $i <= $lastIDPsuID; $i++) {
+		$resultsfromquery=getPsu($i, $db);
+		array_push($psuArray, $resultsfromquery);
+	}
+}
+createPsuArray($lastIDPsuID, $db);
+$psuArray_json = json_encode($psuArray);
+//===============//
+function getRam($ram, $db) {
+	$stmt = $db->prepare("SELECT * FROM ramarray WHERE ID = :valueOfRAM");
+	if ($stmt->execute(array(':valueOfRAM' => $ram))) {
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    return false;
+}
+function getRamID($ram, $db) {
+	$stmt = $db->prepare("SELECT ID FROM ramarray WHERE ID = :valueOfRAM");
+	if ($stmt->execute(array(':valueOfRAM' => $ram))) {
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
+    }
+    return false;
+}
+function cycleRamID($db) {
+	global $ramIDArray;
+	$ramIDArray = array();
+		for ($i = 1; $i < 20; $i++) {
+			$resultsfromqueryRamID=getRamID($i, $db);
+			if ($resultsfromqueryRamID) {
+			array_push($ramIDArray, $resultsfromqueryRamID[ID]);
+			}
+		}
+	global $lastIDRamID;
+	$lastIDRamID = array_pop($ramIDArray);
+}
+cycleRamID($db);
+function createRamArray($lastIDRamID, $db) {
+	global $ramArray;
+	$ramArray = array();
+	for ($i = 1; $i <= $lastIDRamID; $i++) {
+		$resultsfromquery=getRam($i, $db);
+		array_push($ramArray, $resultsfromquery);
+	}
+}
+createRamArray($lastIDRamID, $db);
+$ramArray_json = json_encode($ramArray);
+//===============//
+function getStorage($storage, $db) {
+	$stmt = $db->prepare("SELECT * FROM storagearray WHERE ID = :valueOfSTORAGE");
+	if ($stmt->execute(array(':valueOfSTORAGE' => $storage))) {
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    return false;
+}
+function getStorageID($storage, $db) {
+	$stmt = $db->prepare("SELECT ID FROM storagearray WHERE ID = :valueOfSTORAGE");
+	if ($stmt->execute(array(':valueOfSTORAGE' => $storage))) {
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
+    }
+    return false;
+}
+function cycleStorageID($db) {
+	global $storageIDArray;
+	$storageIDArray = array();
+		for ($i = 1; $i < 20; $i++) {
+			$resultsfromqueryStorageID=getStorageID($i, $db);
+			if ($resultsfromqueryStorageID) {
+			array_push($storageIDArray, $resultsfromqueryStorageID[ID]);
+			}
+		}
+	global $lastIDStorageID;
+	$lastIDStorageID = array_pop($storageIDArray);
+}
+cycleStorageID($db);
+function createStorageArray($lastIDStorageID, $db) {
+	global $storageArray;
+	$storageArray = array();
+	for ($i = 1; $i <= $lastIDStorageID; $i++) {
+		$resultsfromquery=getStorage($i, $db);
+		array_push($storageArray, $resultsfromquery);
+	}
+}
+createStorageArray($lastIDStorageID, $db);
+$storageArray_json = json_encode($storageArray);
 /* LEGEND: 
 	$amdGpu/$nvidiaGpu = number matching ID in database (in our case, $i looping 0-15)
 	$stmt/$stmt2 = gets results into our general array
